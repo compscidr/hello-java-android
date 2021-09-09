@@ -24,4 +24,4 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./app/build/jacoco/jacoco.xml
+          file: ./app/build/reports/jacoco/jacocoTestReportDebug/jacocoTestReportDebug.xml
