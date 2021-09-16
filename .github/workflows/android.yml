@@ -24,7 +24,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-        run: ./gradlew jacocoTestReport
+          script: ./gradlew jacocoTestReport
       - name: Upload Test Report to CodeCov
         # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v2
