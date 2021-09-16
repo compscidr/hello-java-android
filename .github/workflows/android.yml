@@ -24,10 +24,10 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: ./gradlew jacocoTestReport
+          script: ./gradlew connectedCheck
       - name: Upload Test Report to CodeCov
         # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./app/build/reports/jacoco/jacocoTestReportDebug/jacocoTestReportDebug.xml
+          file: ./app/build/reports/coverage/androidTest/debug/report.xml
