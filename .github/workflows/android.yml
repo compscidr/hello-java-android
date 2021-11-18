@@ -9,22 +9,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: set up JDK 1.8
+      - name: set up JDK
         uses: actions/setup-java@v2
         with:
           java-version: 11
           distribution: temurin
-
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
       - name: Build with Gradle
         run: ./gradlew build
-      - name: Generate Test Report
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: ./gradlew connectedCheck
+      - name: Non-device tests
+        run: ./gradlew check
+      - name: On-Device Tests
+        run: ./gradlew connectedCheck
       - name: Upload Test Report to CodeCov
         # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v2
