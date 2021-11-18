@@ -83,3 +83,5 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
 //            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
 //    ]))
 }
+
+apply from: '../checkstyle.gradle'
