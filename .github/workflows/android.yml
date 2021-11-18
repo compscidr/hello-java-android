@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: set up JDK
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           java-version: 11
