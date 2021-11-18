@@ -21,7 +21,7 @@ jobs:
       - name: Non-device tests
         run: ./gradlew check
       - name: On-Device Tests
-        run: adb connect android-emulator:5555 && adb wait-for-device ./gradlew connectedCheck
+        run: adb connect android-emulator:5555 && adb wait-for-device && ./gradlew connectedCheck
       - name: Upload Test Report to CodeCov
         # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v2
