@@ -19,7 +19,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: lint
-        run: ./gradlew awm:lint
+        run: ./gradlew app:lint
       - name: lint results
         uses: yutailang0119/action-android-lint@v1.1.1
         with:
