@@ -1,7 +1,4 @@
 buildscript {
-    ext {
-
-    }
     repositories {
         google()
         mavenCentral()
