@@ -24,7 +24,7 @@ This aims to be a starter repo with all of the following tooling setup:
 There are three different reports produced:
 - one for debug unit tests (located in `app/build/reports/jacoco/jacocoTestReportDebug`)
 - one for release unit tests (located in `app/build/reports/jacoco/jacocoTestReportRelease`)
-- one for connected (on device / emulator tests) (located in `app/build/reports/coverage/androidTest/connected`)
+- one for connected (on device / emulator tests) (located in `app/build/reports/coverage/androidTest/debug`)
 
 In order to produce them all, just run:
 `./gradlew connectedCheck && ./gradlew jacocoTestReport`

@@ -35,8 +35,9 @@ jobs:
       - name: Unit Test Coverage Reports
         run: ./gradlew app:jacocoTestReport
       - uses: actions/upload-artifact@v2
+        name: Store Reporting Artifacts
         with:
-          name: Store Reporting Artifacts
+          name: app-reports
           path: app/build/reports
 
       - name: Upload Test Report to CodeCov
@@ -44,4 +45,4 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./app/build/reports/coverage/androidTest/connected/report.xml,./app/build/reports/jacoco/jacocoTestReportDebug/jacocoTestReportDebug.xml
+          files: ./app/build/reports/coverage/androidTest/debug/report.xml,./app/build/reports/jacoco/jacocoTestReportDebug/jacocoTestReportDebug.xml
