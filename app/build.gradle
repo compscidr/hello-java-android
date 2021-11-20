@@ -96,11 +96,4 @@ jacoco {
     toolVersion = '0.8.7'
 }
 
-task connectedTestReport(type: JacocoReport, dependsOn: ['connectedCheck']) {
-    reports {
-        xml.required = true
-        html.required = true
-    }
-}
-
 apply from: '../checkstyle.gradle'
