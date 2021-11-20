@@ -1,6 +1,6 @@
 # hello-java-android
 [![Build Status](https://github.com/compscidr/hello-java-android/workflows/Gradle%20Build/badge.svg)](https://github.com/compscidr/hello-java-android/actions)&nbsp;
-[![codecov](https://codecov.io/gh/compscidr/hello-java-android/branch/master/graph/badge.svg)](https://codecov.io/gh/compscidr/hello-java-android)&nbsp;
+[![codecov](https://codecov.io/gh/compscidr/hello-java-android/branch/main/graph/badge.svg)](https://codecov.io/gh/compscidr/hello-java-android)&nbsp;
 
 When starting a new project, I always find getting the tools up and running quickly is a pain, so I
 wanted something for java / android which already had everything setup and working.
