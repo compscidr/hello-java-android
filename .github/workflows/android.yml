@@ -18,13 +18,30 @@ jobs:
         uses: android-actions/setup-android@v2
       - name: Build with Gradle
         run: ./gradlew build
+      - name: lint
+        run: ./gradlew awm:lint
+      - name: lint results
+        uses: yutailang0119/action-android-lint@v1.1.1
+        with:
+          xml_path: app/build/reports/lint/report.xml
+      - name: checkstyle
+        run: ./gradlew app:checkstyle
       - name: Non-device tests
-        run: ./gradlew check
+        run: ./gradlew testDebugUnitTest
       - name: On-Device Tests
         run: adb connect android-emulator:5555 && adb wait-for-device && ./gradlew connectedCheck
+      - name: Connected Test Coverage Reports
+        run: ./gradlew app:connectedTestReport
+      - name: Unit Test Coverage Reports
+        run: ./gradlew app:jacocoTestReport
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Store Reporting Artifacts
+          path: app/build/reports
+
       - name: Upload Test Report to CodeCov
         # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./app/build/reports/coverage/androidTest/debug/report.xml
+          files: ./app/build/reports/coverage/androidTest/connected/report.xml,./app/build/reports/jacoco/jacocoTestReportDebug/jacocoTestReportDebug.xml
