@@ -15,6 +15,16 @@ but I'm cheap and the macos instances are expensive and use all my actions credi
 
 This aims to be a starter repo with all of the following tooling setup:
 * [Github actions](https://github.com/marketplace/actions/gradle-android)
+* [Checkstyle]()
 * [Junit5](https://junit.org/junit5/docs/current/user-guide/) (unit + integration tests)
 * [Jacoco](https://www.eclemma.org/jacoco/)
 * [Codecov](https://codecov.io/)
+
+# Code coverage notes:
+There are three different reports produced:
+- one for debug unit tests (located in `app/build/reports/jacoco/jacocoTestReportDebug`)
+- one for release unit tests (located in `app/build/reports/jacoco/jacocoTestReportRelease`)
+- one for connected (on device / emulator tests) (located in `app/build/reports/coverage/androidTest/connected`)
+
+In order to produce them all, just run:
+`./gradlew connectedCheck && ./gradlew jacocoTestReport`
