@@ -34,7 +34,7 @@ jobs:
         run: ./gradlew app:connectedCheck
       - name: Unit Test Coverage Reports
         run: ./gradlew app:jacocoTestReport
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         name: Store Reporting Artifacts
         with:
           name: app-reports
