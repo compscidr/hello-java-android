@@ -29,7 +29,7 @@ jobs:
       - name: Non-device tests
         run: ./gradlew testDebugUnitTest
       - name: On-Device Tests
-        run: adb connect android-emulator-hello-java:5556 && adb wait-for-device && ./gradlew connectedCheck
+        run: adb connect android-emulator-hello-java:5555 && adb wait-for-device && ./gradlew connectedCheck
       - name: Connected Test Coverage Reports
         run: ./gradlew app:connectedCheck
       - name: Unit Test Coverage Reports
