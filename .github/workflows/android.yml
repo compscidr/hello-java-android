@@ -38,6 +38,7 @@ jobs:
         run: ./gradlew app:jacocoTestReport
       - uses: actions/upload-artifact@v3
         name: Store Reporting Artifacts
+        if: failure()
         with:
           name: app-reports
           path: |
