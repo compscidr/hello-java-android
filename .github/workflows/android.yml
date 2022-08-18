@@ -9,13 +9,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 11
-          distribution: temurin
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+# not needed because using a self-hosted runner with jdk and android already on it:
+# https://github.com/compscidr/docker-github-actions-runner-android
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 11
+#          distribution: temurin
+#      - name: Setup Android SDK
+#        uses: android-actions/setup-android@v2
       - name: Build with Gradle
         run: ./gradlew build
       - name: lint
