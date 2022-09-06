@@ -31,7 +31,11 @@ jobs:
       - name: Non-device tests
         run: ./gradlew testDebugUnitTest
       - name: On-Device Tests
-        run: adb wait-for-device && adb uninstall --user 0 com.example.myapplication || true && ./gradlew -d connectedCheck
+        run: |
+          adb wait-for-device &&
+          adb uninstall --user 0 com.example.myapplication || true &&
+          adb uninstall --user 0 com.example.myapplication.test || true &&
+          ./gradlew -d connectedCheck
       - name: Unit Test Coverage Reports
         run: ./gradlew app:jacocoTestReport
       - uses: actions/upload-artifact@v3
