@@ -47,9 +47,18 @@ jobs:
             app/build/reports
             app/build/outputs
 
-      - name: Upload Test Report to CodeCov
+      - name: Upload Unit Tests Report to CodeCov
         # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./app/build/reports/coverage/androidTest/debug/report.xml,./app/build/reports/jacoco/jacocoTestReportDebug/jacocoTestReportDebug.xml
+          flags: unittests
+          files: ./app/build/reports/jacoco/jacocoTestReportDebug/jacocoTestReportDebug.xml
+
+      - name: Upload Instrumented Tests Report to CodeCov
+        # https://github.com/codecov/codecov-action
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: instrumentedtests
+          files: ./app/build/reports/coverage/androidTest/debug/report.xml
