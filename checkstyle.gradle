@@ -5,7 +5,7 @@ configurations {
 }
 
 def versions = [
-        checkstyle: '10.9.3',
+        checkstyle: '10.10.0',
 ]
 
 checkstyle {
