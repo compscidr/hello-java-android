@@ -6,7 +6,6 @@ import android.content.Context;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import androidx.test.core.app.ActivityScenario;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import de.mannodermaus.junit5.ActivityScenarioExtension;
@@ -21,14 +20,13 @@ public class ExampleInstrumentedTest {
     ActivityScenarioExtension<MainActivity> scenarioExtension = ActivityScenarioExtension.launch(MainActivity.class);
 
     @Test
-    public void useAppContext(ActivityScenario<MainActivity> scenario) {
+    public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.myapplication", appContext.getPackageName());
 
-        scenario.onActivity(activity -> {
-
+        scenarioExtension.getScenario().onActivity(activity -> {
+            // Do something with the Activity
         });
-
     }
 }
