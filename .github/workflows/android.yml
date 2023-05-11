@@ -30,10 +30,10 @@ jobs:
         run: ./gradlew app:checkstyle
       - name: Jvm Unit Tests
         run: ./gradlew testDebugUnitTest
+      - name: Clean Packages
+        run: bash ./scripts/clean-packages.sh
       - name: On-Device Instrumented Tests
-        run: |
-          bash ./scripts/clean-packages.sh &&
-          ./gradlew -d connectedCheck
+        run:  ./gradlew connectedCheck
       - name: Generate Coverage Reports
         run: ./gradlew app:jacocoTestReport
       - uses: actions/upload-artifact@v3
