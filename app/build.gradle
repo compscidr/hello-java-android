@@ -15,6 +15,7 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'de.mannodermaus.android-junit5'
 apply plugin: 'jacoco'
+apply plugin: 'checkstyle'
 
 android {
     compileSdk 33
@@ -91,5 +92,8 @@ jacoco {
     toolVersion = '0.8.10'
 }
 
-
-//apply from: '../checkstyle.gradle'
+checkstyle {
+    showViolations = true
+    ignoreFailures = false
+    toolVersion = "10.3.3"
+}
