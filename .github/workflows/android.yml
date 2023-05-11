@@ -25,7 +25,7 @@ jobs:
         with:
           report-path: app/build/reports/lint/report.xml
       - name: checkstyle
-        run: ./gradlew app:checkstyleMain app:checkstyleTest
+        run: ./gradlew checkstyleMain checkstyleTest
       - name: Jvm Unit Tests
         run: ./gradlew testDebugUnitTest
       - name: Clean Packages
