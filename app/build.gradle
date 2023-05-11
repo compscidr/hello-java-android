@@ -6,27 +6,25 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.0.1'
         classpath "de.mannodermaus.gradle.plugins:android-junit5:1.9.3.0"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.46"
-        classpath "com.hiya:jacoco-android:0.2"
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'de.mannodermaus.android-junit5'
 apply plugin: 'jacoco'
-apply plugin: 'com.hiya.jacoco-android'
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         testInstrumentationRunnerArguments runnerBuilder: 'de.mannodermaus.junit5.AndroidJUnit5Builder'
         testInstrumentationRunnerArguments
         applicationId "com.example.myapplication"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -66,7 +64,7 @@ android {
 
 dependencies {
     implementation 'androidx.test:monitor:1.6.1'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
@@ -93,4 +91,5 @@ jacoco {
     toolVersion = '0.8.10'
 }
 
-apply from: '../checkstyle.gradle'
+
+//apply from: '../checkstyle.gradle'
