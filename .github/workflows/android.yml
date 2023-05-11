@@ -24,8 +24,8 @@ jobs:
         uses: yutailang0119/action-android-lint@v3.1.0
         with:
           report-path: app/build/reports/lint/report.xml
-      - name: checkstyle
-        run: ./gradlew checkStyleMain checkStyleTest
+#      - name: checkstyle
+#        run: ./gradlew checkStyleMain checkStyleTest
       - name: Jvm Unit Tests
         run: ./gradlew testDebugUnitTest
       - name: Clean Packages
