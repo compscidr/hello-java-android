@@ -6,7 +6,7 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.1.1'
         classpath "de.mannodermaus.gradle.plugins:android-junit5:1.9.3.0"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.46"
         classpath "com.hiya:jacoco-android:0.2"
@@ -16,17 +16,17 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'de.mannodermaus.android-junit5'
 apply plugin: 'jacoco'
-apply plugin: 'com.hiya.jacoco-android'
+//apply plugin: 'com.hiya.jacoco-android'
 
 android {
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         testInstrumentationRunnerArguments runnerBuilder: 'de.mannodermaus.junit5.AndroidJUnit5Builder'
         testInstrumentationRunnerArguments
         applicationId "com.example.myapplication"
         minSdk 21
-        targetSdk 32
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -66,27 +66,27 @@ android {
 
 dependencies {
     implementation 'androidx.test:monitor:1.6.1'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment:2.5.3'
-    implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment:2.7.2'
+    implementation 'androidx.navigation:navigation-ui:2.7.2'
     implementation 'androidx.test:core:1.5.0'
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
     testImplementation "org.mockito:mockito-core:5.3.1"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.3"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.3"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
 
     // 4) Jupiter API & Test Runner, if you don't have it already
     androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
+    androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
 
     // 5) The instrumentation test companion libraries
     androidTestImplementation "org.mockito:mockito-core:5.3.1"
     androidTestImplementation("de.mannodermaus.junit5:android-test-core:1.3.0")
     androidTestRuntimeOnly("de.mannodermaus.junit5:android-test-runner:1.3.0")
-    androidTestRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
+    androidTestRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 }
 
 jacoco {
