@@ -10,6 +10,7 @@ countDevices() {
 { read -d '' count_device; } < <(countDevices)
 
 NUM_DEVICES=${count_device}
+echo "GOT HERE"
 if [ $NUM_DEVICES -lt 1 ]; then
     echo "This test request at least one device, we found $NUM_DEVICES"
     exit 1
