@@ -6,7 +6,7 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath 'com.android.tools.build:gradle:8.3.0'
         classpath "de.mannodermaus.gradle.plugins:android-junit5:1.10.0.0"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.51"
     }
