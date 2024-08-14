@@ -77,7 +77,7 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.11.0"
 
     // 4) Jupiter API & Test Runner, if you don't have it already
-    androidTestImplementation("androidx.test:runner:1.6.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
 
     // 5) The instrumentation test companion libraries
