@@ -104,5 +104,5 @@ jacoco {
 checkstyle {
     showViolations = true
     ignoreFailures = false
-    toolVersion = "10.21.1"
+    toolVersion = "10.21.2"
 }
