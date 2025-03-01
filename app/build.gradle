@@ -86,7 +86,7 @@ dependencies {
     // 5) The instrumentation test companion libraries
     androidTestImplementation "org.mockito:mockito-core:5.15.2"
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.7.0"
-    androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.6.0"
+    androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.7.0"
     androidTestRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
     androidTestRuntimeOnly "org.junit.platform:junit-platform-launcher"
 
