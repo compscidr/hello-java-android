@@ -44,8 +44,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     buildFeatures {
         viewBinding true
@@ -74,7 +74,7 @@ dependencies {
     testImplementation platform("org.junit:junit-bom:5.13.1")
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
-    testImplementation "org.mockito:mockito-core:5.17.0"
+    testImplementation "org.mockito:mockito-core:5.18.0"
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
     testRuntimeOnly "org.junit.platform:junit-platform-launcher"
@@ -84,7 +84,14 @@ dependencies {
     androidTestImplementation("org.junit.jupiter:junit-jupiter-api")
 
     // 5) The instrumentation test companion libraries
-    androidTestImplementation "org.mockito:mockito-core:5.17.0"
+    androidTestImplementation ("org.mockito:mockito-core:5.18.0") {
+        exclude group: 'net.bytebuddy', module: 'byte-buddy'
+        exclude group: 'net.bytebuddy', module: 'byte-buddy-agent'
+    }
+    // Pin ByteBuddy to a compatible version
+    androidTestImplementation 'net.bytebuddy:byte-buddy:1.12.23'
+    androidTestImplementation 'net.bytebuddy:byte-buddy-agent:1.12.23'
+    
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.8.0"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.8.0"
     androidTestRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
