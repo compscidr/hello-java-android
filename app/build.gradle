@@ -90,7 +90,7 @@ dependencies {
     }
     // Pin ByteBuddy to a compatible version
     androidTestImplementation 'net.bytebuddy:byte-buddy:1.12.23'
-    androidTestImplementation 'net.bytebuddy:byte-buddy-agent:1.12.23'
+    androidTestImplementation 'net.bytebuddy:byte-buddy-agent:1.17.6'
     
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.8.0"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.8.0"
