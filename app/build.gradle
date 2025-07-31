@@ -69,7 +69,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'androidx.navigation:navigation-fragment:2.9.0'
     implementation 'androidx.navigation:navigation-ui:2.9.0'
-    implementation 'androidx.test:core:1.6.1'
+    implementation 'androidx.test:core:1.7.0'
 
     testImplementation platform("org.junit:junit-bom:5.13.1")
 
