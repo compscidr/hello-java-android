@@ -7,6 +7,11 @@
       "description": "Automerge non-major updates",
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
+    },
+    {
+      "description": "Pin ByteBuddy to avoid Jacoco transform conflicts",
+      "matchPackageNames": ["net.bytebuddy:byte-buddy", "net.bytebuddy:byte-buddy-agent"],
+      "enabled": false
     }
   ]
 }
