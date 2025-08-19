@@ -112,6 +112,22 @@ jacoco {
     toolVersion = '0.8.13'
 }
 
+// Fix Jacoco transformation issue with byte-buddy
+configurations.all { configuration ->
+    configuration.resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'net.bytebuddy') {
+            details.useVersion '1.17.7'
+        }
+    }
+}
+
+// Exclude byte-buddy from Jacoco transformations
+afterEvaluate {
+    tasks.withType(Test) {
+        systemProperty "net.bytebuddy.experimental", "true"
+    }
+}
+
 checkstyle {
     showViolations = true
     ignoreFailures = false
