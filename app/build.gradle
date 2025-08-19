@@ -88,9 +88,9 @@ dependencies {
         exclude group: 'net.bytebuddy', module: 'byte-buddy'
         exclude group: 'net.bytebuddy', module: 'byte-buddy-agent'
     }
-    // Pin ByteBuddy to a compatible version
-    androidTestImplementation 'net.bytebuddy:byte-buddy:1.12.23'
-    androidTestImplementation 'net.bytebuddy:byte-buddy-agent:1.17.7'
+    // Pin ByteBuddy to a Jacoco-compatible version
+    androidTestImplementation 'net.bytebuddy:byte-buddy:1.14.14'
+    androidTestImplementation 'net.bytebuddy:byte-buddy-agent:1.14.14'
     
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.8.0"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.8.0"
@@ -111,6 +111,23 @@ dependencies {
 jacoco {
     toolVersion = '0.8.13'
 }
+
+// Fix Jacoco transformation issue with byte-buddy
+configurations.all { configuration ->
+    configuration.resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'net.bytebuddy') {
+            details.useVersion '1.14.14'
+        }
+    }
+}
+
+// Exclude byte-buddy from Jacoco transformations
+afterEvaluate {
+    tasks.withType(Test) {
+        systemProperty "net.bytebuddy.experimental", "true"
+    }
+}
+
 
 checkstyle {
     showViolations = true
