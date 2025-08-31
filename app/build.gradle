@@ -132,5 +132,5 @@ afterEvaluate {
 checkstyle {
     showViolations = true
     ignoreFailures = false
-    toolVersion = "11.0.0"
+    toolVersion = "11.0.1"
 }
