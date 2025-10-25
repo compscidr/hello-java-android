@@ -36,7 +36,7 @@ jobs:
         run:  ./gradlew connectedCheck
       - name: Generate Coverage Reports
         run: ./gradlew app:jacocoTestReport
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         name: Store Reporting Artifacts
         if: failure()
         with:
