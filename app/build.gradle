@@ -71,7 +71,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.9.6'
     implementation 'androidx.test:core:1.7.0'
 
-    testImplementation platform("org.junit:junit-bom:6.0.1")
+    testImplementation platform("org.junit:junit-bom:6.0.2")
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
     testImplementation "org.mockito:mockito-core:5.21.0"
