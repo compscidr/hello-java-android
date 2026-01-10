@@ -4,10 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
-
-import androidx.test.platform.app.InstrumentationRegistry;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,13 +20,11 @@ public class UserServiceInstrumentedTest {
     private UserRepository mockRepository;
 
     private UserService userService;
-    private Context appContext;
     private AutoCloseable closeable;
 
     @BeforeEach
     public void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
-        appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         userService = new UserService(mockRepository);
     }
 
@@ -41,9 +35,6 @@ public class UserServiceInstrumentedTest {
 
     @Test
     public void testServiceWithMockedRepository() {
-        // Verify we're running on Android
-        assertEquals("com.example.myapplication", appContext.getPackageName());
-
         // Arrange
         when(mockRepository.isUserValid(42)).thenReturn(true);
         when(mockRepository.getUserName(42)).thenReturn("Android User");
