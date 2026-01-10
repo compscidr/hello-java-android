@@ -8,17 +8,16 @@ import android.content.Context;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Instrumented test demonstrating Mockito usage in Android tests.
  * This test runs on an Android device or emulator.
  */
-@ExtendWith(MockitoExtension.class)
 public class UserServiceInstrumentedTest {
 
     @Mock
@@ -26,11 +25,18 @@ public class UserServiceInstrumentedTest {
 
     private UserService userService;
     private Context appContext;
+    private AutoCloseable closeable;
 
     @BeforeEach
     public void setUp() {
+        closeable = MockitoAnnotations.openMocks(this);
         appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         userService = new UserService(mockRepository);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        closeable.close();
     }
 
     @Test
