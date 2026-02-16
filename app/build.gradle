@@ -78,14 +78,14 @@ dependencies {
     implementation 'androidx.test:core:1.7.0'
 
     // Unit tests
-    testImplementation platform("org.junit:junit-bom:5.14.2")
+    testImplementation platform("org.junit:junit-bom:6.0.3")
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
     testImplementation "org.mockito:mockito-core:5.21.0"
     testImplementation "org.mockito:mockito-junit-jupiter:5.21.0"
 
     // Instrumentation tests
-    androidTestImplementation platform("org.junit:junit-bom:5.14.2")
+    androidTestImplementation platform("org.junit:junit-bom:6.0.3")
     androidTestImplementation "org.junit.jupiter:junit-jupiter-api"
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:2.0.1"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:2.0.1"
