@@ -7,7 +7,7 @@ jobs:
 
     runs-on: self-hosted
     env:
-      SAIR_ORCHESTRATOR_URL: http://sair-orchestrator:8081
+      SAIR_PROXY_URL: http://sair-adb-proxy:8550
 
     steps:
       - uses: actions/checkout@v6
@@ -41,8 +41,6 @@ jobs:
 #        run: ./gradlew checkStyleMain checkStyleTest
       - name: Jvm Unit Tests
         run: ./gradlew testDebugUnitTest
-      - name: Clean Packages
-        run: bash ./scripts/clean-packages.sh
 
       - name: Acquire device lock
         run: |
@@ -50,14 +48,18 @@ jobs:
           ACQUIRE_OUTPUT=$(tools/sair-acquire)
           eval "$ACQUIRE_OUTPUT"
           echo "SAIR_LOCK_ID=${SAIR_LOCK_ID}" >> $GITHUB_ENV
-          echo "SAIR_HEARTBEAT_PID=${SAIR_HEARTBEAT_PID}" >> $GITHUB_ENV
           echo "SAIR_SERIALS=${SAIR_SERIALS}" >> $GITHUB_ENV
+          echo "SAIR_PROXY_URL=${SAIR_PROXY_URL}" >> $GITHUB_ENV
+          echo "ANDROID_ADB_SERVER_PORT=${ANDROID_ADB_SERVER_PORT}" >> $GITHUB_ENV
+
+      - name: Clean Packages
+        run: bash ./scripts/clean-packages.sh
 
       - name: Uninstall stale APKs
         run: |
           adb devices | grep -w device | awk '{print $1}' | while read serial; do
-            adb -s "$serial" uninstall com.example.myapplication || true
-            adb -s "$serial" uninstall com.example.myapplication.test || true
+            adb -s "$serial" uninstall com.example.myapplication 2>&1 | grep -v "DELETE_FAILED_INTERNAL_ERROR" || true
+            adb -s "$serial" uninstall com.example.myapplication.test 2>&1 | grep -v "DELETE_FAILED_INTERNAL_ERROR" || true
           done
 
       - name: On-Device Instrumented Tests
