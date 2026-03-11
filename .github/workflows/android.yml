@@ -6,9 +6,20 @@ jobs:
   build:
 
     runs-on: self-hosted
+    env:
+      SAIR_ORCHESTRATOR_URL: http://sair-orchestrator:8081
 
     steps:
       - uses: actions/checkout@v6
+
+      - name: Load secrets from 1Password
+        uses: 1password/load-secrets-action@v3
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          SAIR_API_KEY: op://Infrastructure/sair-api-key/credential
+
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
@@ -32,8 +43,32 @@ jobs:
         run: ./gradlew testDebugUnitTest
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
+
+      - name: Acquire device lock
+        run: |
+          curl -sfL https://raw.githubusercontent.com/compscidr/sair/main/tools/sair-acquire -o /tmp/sair-acquire
+          curl -sfL https://raw.githubusercontent.com/compscidr/sair/main/tools/sair-release -o /tmp/sair-release
+          chmod +x /tmp/sair-acquire /tmp/sair-release
+          ACQUIRE_OUTPUT=$(/tmp/sair-acquire)
+          eval "$ACQUIRE_OUTPUT"
+          echo "SAIR_LOCK_ID=${SAIR_LOCK_ID}" >> $GITHUB_ENV
+          echo "SAIR_HEARTBEAT_PID=${SAIR_HEARTBEAT_PID}" >> $GITHUB_ENV
+          echo "SAIR_SERIALS=${SAIR_SERIALS}" >> $GITHUB_ENV
+
+      - name: Uninstall stale APKs
+        run: |
+          adb devices | grep -w device | awk '{print $1}' | while read serial; do
+            adb -s "$serial" uninstall com.example.myapplication || true
+            adb -s "$serial" uninstall com.example.myapplication.test || true
+          done
+
       - name: On-Device Instrumented Tests
         run:  ./gradlew connectedCheck
+
+      - name: Release device lock
+        if: always()
+        run: /tmp/sair-release
+
       - name: Generate Coverage Reports
         run: ./gradlew app:jacocoTestReport
       - uses: actions/upload-artifact@v7
