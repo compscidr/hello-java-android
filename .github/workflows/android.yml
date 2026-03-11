@@ -6,9 +6,20 @@ jobs:
   build:
 
     runs-on: self-hosted
+    env:
+      SAIR_PROXY_URL: http://sair-adb-proxy:8550
 
     steps:
       - uses: actions/checkout@v6
+
+      - name: Load secrets from 1Password
+        uses: 1password/load-secrets-action@v3
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          SAIR_API_KEY: op://Infrastructure/sair-api-key/credential
+
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
@@ -30,10 +41,34 @@ jobs:
 #        run: ./gradlew checkStyleMain checkStyleTest
       - name: Jvm Unit Tests
         run: ./gradlew testDebugUnitTest
+
+      - name: Acquire device lock
+        run: |
+          chmod +x tools/sair-acquire tools/sair-release
+          ACQUIRE_OUTPUT=$(tools/sair-acquire)
+          eval "$ACQUIRE_OUTPUT"
+          echo "SAIR_LOCK_ID=${SAIR_LOCK_ID}" >> $GITHUB_ENV
+          echo "SAIR_SERIALS=${SAIR_SERIALS}" >> $GITHUB_ENV
+          echo "SAIR_PROXY_URL=${SAIR_PROXY_URL}" >> $GITHUB_ENV
+          echo "ANDROID_ADB_SERVER_PORT=${ANDROID_ADB_SERVER_PORT}" >> $GITHUB_ENV
+
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
+
+      - name: Uninstall stale APKs
+        run: |
+          adb devices | grep -w device | awk '{print $1}' | while read serial; do
+            adb -s "$serial" uninstall com.example.myapplication 2>&1 | grep -v "DELETE_FAILED_INTERNAL_ERROR" || true
+            adb -s "$serial" uninstall com.example.myapplication.test 2>&1 | grep -v "DELETE_FAILED_INTERNAL_ERROR" || true
+          done
+
       - name: On-Device Instrumented Tests
         run:  ./gradlew connectedCheck
+
+      - name: Release device lock
+        if: always()
+        run: tools/sair-release
+
       - name: Generate Coverage Reports
         run: ./gradlew app:jacocoTestReport
       - uses: actions/upload-artifact@v7
