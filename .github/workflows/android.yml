@@ -6,8 +6,6 @@ jobs:
   build:
 
     runs-on: self-hosted
-    env:
-      SAIR_PROXY_URL: http://sair-adb-proxy:8550
 
     steps:
       - uses: actions/checkout@v6
@@ -42,10 +40,12 @@ jobs:
       - name: Jvm Unit Tests
         run: ./gradlew testDebugUnitTest
 
+      - name: Install SAIR tools
+        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/main/install.sh | bash
+
       - name: Acquire device lock
         run: |
-          chmod +x tools/sair-acquire tools/sair-release
-          ACQUIRE_OUTPUT=$(tools/sair-acquire)
+          ACQUIRE_OUTPUT=$(sair-acquire)
           eval "$ACQUIRE_OUTPUT"
           echo "SAIR_LOCK_ID=${SAIR_LOCK_ID}" >> $GITHUB_ENV
           echo "SAIR_SERIALS=${SAIR_SERIALS}" >> $GITHUB_ENV
@@ -67,7 +67,7 @@ jobs:
 
       - name: Release device lock
         if: always()
-        run: tools/sair-release
+        run: sair-release
 
       - name: Generate Coverage Reports
         run: ./gradlew app:jacocoTestReport
