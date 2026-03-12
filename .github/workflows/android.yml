@@ -66,7 +66,7 @@ jobs:
         run:  ./gradlew connectedCheck
 
       - name: Release device lock
-        if: always()
+        if: always() && env.SAIR_LOCK_ID != ''
         run: sair-release
 
       - name: Generate Coverage Reports
