@@ -41,16 +41,10 @@ jobs:
         run: ./gradlew testDebugUnitTest
 
       - name: Install SAIR tools
-        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/main/install.sh | bash
+        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.3/install.sh | bash
 
       - name: Acquire device lock
-        run: |
-          ACQUIRE_OUTPUT=$(sair-acquire)
-          eval "$ACQUIRE_OUTPUT"
-          echo "SAIR_LOCK_ID=${SAIR_LOCK_ID}" >> $GITHUB_ENV
-          echo "SAIR_SERIALS=${SAIR_SERIALS}" >> $GITHUB_ENV
-          echo "SAIR_PROXY_URL=${SAIR_PROXY_URL}" >> $GITHUB_ENV
-          echo "ANDROID_ADB_SERVER_PORT=${ANDROID_ADB_SERVER_PORT}" >> $GITHUB_ENV
+        run: sair-acquire | sed 's/^export //' >> $GITHUB_ENV
 
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
