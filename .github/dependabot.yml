@@ -7,3 +7,5 @@ updates:
     ignore:
       - dependency-name: "net.bytebuddy:byte-buddy"
       - dependency-name: "net.bytebuddy:byte-buddy-agent"
+      - dependency-name: "org.junit:junit-bom"
+        update-types: ["version-update:semver-major"]
