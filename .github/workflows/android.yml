@@ -26,7 +26,7 @@ jobs:
       - name: Display host of runner
         run: echo $HOST_NAME
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
       - name: Build with Gradle
         run: ./gradlew build
       - name: lint
