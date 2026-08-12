@@ -16,7 +16,7 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SAIR_API_KEY: op://Infrastructure/sair-api-key/credential
+          SAIR_API_KEY: op://Infrastructure/sair-user-api-key/credential
 
       - name: Set up JDK
         uses: actions/setup-java@v5
@@ -41,10 +41,14 @@ jobs:
         run: ./gradlew testDebugUnitTest
 
       - name: Install SAIR tools
-        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.3/install.sh | bash
+        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.12/install.sh | bash
 
+      # Capture output in a variable rather than piping, so a sair-acquire
+      # failure fails this step instead of being masked by sed's exit code.
       - name: Acquire device lock
-        run: sair-acquire | sed 's/^export //' >> $GITHUB_ENV
+        run: |
+          ACQUIRE_OUTPUT=$(sair-acquire --count 1)
+          echo "$ACQUIRE_OUTPUT" | sed -n 's/^export //p' >> "$GITHUB_ENV"
 
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
