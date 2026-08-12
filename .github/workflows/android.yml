@@ -16,7 +16,7 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          SAIR_API_KEY: op://Infrastructure/sair-api-key/credential
+          SAIR_API_KEY: op://Infrastructure/sair-user-api-key/credential
 
       - name: Set up JDK
         uses: actions/setup-java@v5
