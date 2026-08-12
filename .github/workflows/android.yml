@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload Unit Tests Report to CodeCov
         # https://github.com/codecov/codecov-action
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
@@ -88,7 +88,7 @@ jobs:
 
       - name: Upload Instrumented Tests Report to CodeCov
         # https://github.com/codecov/codecov-action
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: instrumentedtests
