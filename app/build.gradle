@@ -24,7 +24,7 @@ android {
         testInstrumentationRunnerArguments runnerBuilder: 'de.mannodermaus.junit5.AndroidJUnit5Builder'
         testInstrumentationRunnerArguments
         applicationId "com.example.myapplication"
-        minSdk 21
+        minSdk 23
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -49,6 +49,16 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    packaging {
+        jniLibs {
+            // At minSdk 23+ AGP defaults extractNativeLibs to false, leaving
+            // libdexmakerjvmtiagent.so uncompressed inside the APK. Debug.attachJvmtiAgent
+            // needs a real file path, so Mockito's inline mock maker fails to init and every
+            // @Mock in an instrumented test dies with an NPE. Only the androidTest APK ships
+            // native libs, so the app APK is unaffected.
+            useLegacyPackaging = true
+        }
     }
     lint {
         abortOnError false
