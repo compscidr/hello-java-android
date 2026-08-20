@@ -78,6 +78,8 @@ dependencies {
     implementation 'androidx.test:core:1.7.0'
 
     // Unit tests
+    // Pinned to 5.x: on JUnit 6 the android-junit5 runner requires API 35+ and disables all
+    // Jupiter instrumented tests below it. See renovate.json. Revisit when all test devices are API 35+.
     testImplementation platform("org.junit:junit-bom:5.14.4")
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
@@ -85,6 +87,7 @@ dependencies {
     testImplementation "org.mockito:mockito-junit-jupiter:5.23.0"
 
     // Instrumentation tests
+    // Pinned to 5.x — see note above.
     androidTestImplementation platform("org.junit:junit-bom:5.14.4")
     androidTestImplementation "org.junit.jupiter:junit-jupiter-api"
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:2.0.1"
