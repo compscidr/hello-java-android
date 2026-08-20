@@ -18,7 +18,7 @@ apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         testInstrumentationRunnerArguments runnerBuilder: 'de.mannodermaus.junit5.AndroidJUnit5Builder'
