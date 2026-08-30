@@ -138,5 +138,5 @@ configurations.all { configuration ->
 checkstyle {
     showViolations = true
     ignoreFailures = false
-    toolVersion = "14.0.0"
+    toolVersion = "14.1.0"
 }
