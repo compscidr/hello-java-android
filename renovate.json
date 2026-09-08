@@ -6,6 +6,11 @@
       "description": "Pin ByteBuddy to avoid Jacoco transform conflicts",
       "matchPackageNames": ["net.bytebuddy:byte-buddy", "net.bytebuddy:byte-buddy-agent"],
       "enabled": false
+    },
+    {
+      "description": "Hold AGP on 9.3.x: from 9.4.0 connectedAndroidTest runs the new android-test-engine inside a Gradle worker daemon whose environment is only HOME and LANG, so the ANDROID_ADB_SERVER_PORT that sair-acquire exports never reaches the adb subprocesses and every on-device run fails. Revisit when AGP forwards the ADB server port to the engine, or sair can route the default adb port.",
+      "matchPackageNames": ["com.android.tools.build:gradle"],
+      "allowedVersions": "<9.4"
     }
   ]
 }
