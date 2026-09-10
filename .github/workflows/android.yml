@@ -40,13 +40,19 @@ jobs:
       - name: Jvm Unit Tests
         run: ./gradlew testDebugUnitTest
 
-      - name: Install SAIR tools
-        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.16/install.sh | bash
+      # Only the two bash tools are needed here; the proxy runs on the host.
+      - name: Fetch SAIR tools
+        uses: actions/checkout@v7
+        with:
+          repository: compscidr/sair
+          ref: v0.0.17
+          sparse-checkout: tools
+          path: sair
 
       # sair-acquire (v0.0.16+) appends its exports to $GITHUB_ENV itself.
       - name: Acquire device lock
         run: |
-          sair-acquire --count 1 > /dev/null
+          sair/tools/sair-acquire --count 1 > /dev/null
 
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
@@ -63,7 +69,7 @@ jobs:
 
       - name: Release device lock
         if: always() && env.SAIR_LOCK_ID != ''
-        run: sair-release
+        run: sair/tools/sair-release --status ${{ job.status }}
 
       - name: Generate Coverage Reports
         run: ./gradlew app:jacocoTestReport
