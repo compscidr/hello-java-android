@@ -41,14 +41,12 @@ jobs:
         run: ./gradlew testDebugUnitTest
 
       - name: Install SAIR tools
-        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.15/install.sh | bash
+        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.16/install.sh | bash
 
-      # Capture output in a variable rather than piping, so a sair-acquire
-      # failure fails this step instead of being masked by sed's exit code.
+      # sair-acquire (v0.0.16+) appends its exports to $GITHUB_ENV itself.
       - name: Acquire device lock
         run: |
-          ACQUIRE_OUTPUT=$(sair-acquire --count 1)
-          echo "$ACQUIRE_OUTPUT" | sed -n 's/^export //p' >> "$GITHUB_ENV"
+          sair-acquire --count 1 > /dev/null
 
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
