@@ -41,7 +41,7 @@ jobs:
         run: ./gradlew testDebugUnitTest
 
       - name: Install SAIR tools
-        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.14/install.sh | bash
+        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.15/install.sh | bash
 
       # Capture output in a variable rather than piping, so a sair-acquire
       # failure fails this step instead of being masked by sed's exit code.
