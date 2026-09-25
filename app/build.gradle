@@ -101,8 +101,8 @@ dependencies {
     testImplementation platform("org.junit:junit-bom:5.14.4")
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
-    testImplementation "org.mockito:mockito-core:5.23.0"
-    testImplementation "org.mockito:mockito-junit-jupiter:5.23.0"
+    testImplementation "org.mockito:mockito-core:5.24.0"
+    testImplementation "org.mockito:mockito-junit-jupiter:5.24.0"
 
     // Instrumentation tests
     // Pinned to 5.x — see note above.
@@ -111,7 +111,7 @@ dependencies {
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:2.0.1"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:2.0.1"
     androidTestImplementation "androidx.test:runner:1.7.0"
-    androidTestImplementation ("org.mockito:mockito-android:5.23.0") {
+    androidTestImplementation ("org.mockito:mockito-android:5.24.0") {
         exclude group: 'net.bytebuddy', module: 'byte-buddy'
         exclude group: 'net.bytebuddy', module: 'byte-buddy-agent'
     }
