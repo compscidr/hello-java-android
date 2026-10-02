@@ -51,9 +51,10 @@ jobs:
           persist-credentials: false
 
       # sair-acquire (v0.0.16+) appends its exports to $GITHUB_ENV itself.
+      # Bot-authored PRs (Renovate) queue behind everyone else while the phones are busy.
       - name: Acquire device lock
         run: |
-          sair/tools/sair-acquire --count 1 > /dev/null
+          sair/tools/sair-acquire --count 1 --priority ${{ github.event.pull_request.user.type == 'Bot' && -1 || 0 }} > /dev/null
 
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
