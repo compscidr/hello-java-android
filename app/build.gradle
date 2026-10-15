@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:9.4.1'
-        classpath "de.mannodermaus.gradle.plugins:android-junit5:2.0.1"
+        classpath "de.mannodermaus.gradle.plugins:android-junit5:2.0.2"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.60.1"
     }
 }
