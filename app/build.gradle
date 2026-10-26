@@ -131,7 +131,7 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = '0.8.15'
+    toolVersion = '0.8.16'
 }
 
 // Fix Jacoco transformation issue with byte-buddy. Scoped to androidTest only: 1.14.14 can't read
