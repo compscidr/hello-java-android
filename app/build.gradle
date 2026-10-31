@@ -147,5 +147,5 @@ configurations.matching { it.name.toLowerCase().contains('androidtest') }.config
 checkstyle {
     showViolations = true
     ignoreFailures = false
-    toolVersion = "14.3.0"
+    toolVersion = "14.4.0"
 }
